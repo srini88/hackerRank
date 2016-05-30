@@ -1,79 +1,67 @@
-var arr = [35,2,65,7,8,9,12,121, 121,33,99];
+// https://www.hackerrank.com/challenges/cut-the-sticks
+// You are given  sticks, where the length of each stick is a positive integer. A cut operation is performed on the sticks such that all of them are reduced by the length of the smallest stick.
+// Suppose we have six sticks of the following lengths:
+// 5 4 4 2 2 8
+// Then, in one cut operation we make a cut of length 2 from each of the six sticks. For the next cut operation four sticks are left (of non-zero length), whose lengths are the following: 
+// 3 2 2 6
+// The above step is repeated until no sticks are left.
+// Given the length of  sticks, print the number of sticks that are left before each subsequent cut operations.
+// Note: For each cut operation, you have to recalcuate the length of smallest sticks (excluding zero-length sticks).
+// Input Format 
+// The first line contains a single integer . 
+// The next line contains  integers: a0, a1,...aN-1 separated by space, where ai represents the length of ith stick.
+// Output Format 
+// For each operation, print the number of sticks that are cut, on separate lines.
 
-// something like (but it doesn't have to be)
-//arr.min(); // return 0
-//arr.max(); // return 100
+// Sample Input #00
 
-// With ECMAScript 6 you can use the new spread operator (three dots: ...) with Math.max() like this: Math.max(...[2, 5, 16, 1])
+// 6
+// 5 4 4 2 2 8
+// Sample Output #00
 
-// How about augmenting the built-in Array object to use Math.max/Math.min instead:
-
-Array.prototype.max = function() {
-  return Math.max.apply(null, this);
-};
-
-Array.prototype.min = function() {
-  return Math.min.apply(null, this);
-};
-//even with duplicates it is printing the max...works...
-//remember dont pass anything to max methd...it should be called on an array itself...
-console.log(arr.max());
-console.log(arr.min())
-
-
-// Augmenting the built-ins can cause collisions with other libraries (some see), so you may be more comfortable with just apply'ing Math.xxx() to your array directly:
-
-// The Math.max() function returns the largest of zero or more numbers.
-
-// SyntaxEDIT
-// Math.max([value1[, value2[, ...]]])
-// Parameters
-
-// value1, value2, ...
-// Numbers.
-// DescriptionEDIT
-// Because max() is a static method of Math, you always use it as Math.max(), rather than as a method of a Math object you created (Math is not a constructor).
-
-// If no arguments are given, the result is -Infinity.
-
-// If at least one of arguments cannot be converted to a number, the result is NaN.
-
-// ExamplesEDIT
-// Using Math.max()
-
-// Math.max(10, 20);   //  20
-// Math.max(-10, -20); // -10
-// Math.max(-10, 20);  //  20
-// The following function uses Function.prototype.apply() to find the maximum element in a numeric array. getMaxOfArray([1, 2, 3]) is equivalent to Math.max(1, 2, 3), but you can use getMaxOfArray() on programmatically constructed arrays of any size.
-
-// function getMaxOfArray(numArray) {
-//   return Math.max.apply(null, numArray);
-// }
+// 6
+// 4
+// 2
+// 1
+//left before each subsequent cut/
 
 
-// var min = Math.min.apply(null, arr),
-//     max = Math.max.apply(null, arr);
 
-var maxi = function(arr){
-	return Math.max.apply(this,arr);
+/////////////// ignore above this line ////////////////////
+function findMin(arr){
+    return Math.min.apply(this, arr);
 }
 
-var mini = function(arr){
-	return Math.min.apply(this,arr);
+function process(arr){
+    
+    if (arr.length >0){
+        var min = findMin(arr);
+        var cuts = arr.length;
+        console.log("min>0 ",cuts); 
+        //you cannot manipulate array with filter..
+        var cutArr = arr.map(function(item){
+            
+            if (item-min >0){
+            	item = item-min;
+            	return item;
+            }
+            return 0;
+        })
+        var newArr =cutArr.filter(function(item){
+        	return (item >0);
+        })
+        process(newArr);
+    
+    }
+    else
+    	return;
 }
 
-console.log(maxi(arr));
-console.log(mini(arr));
+function main() {
+    var n = 6;
+    //arr = readLine().split(' ');
+    var arr = [5,4,4,2,2,8];
+    process(arr);
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+main();

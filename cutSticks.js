@@ -24,60 +24,34 @@
 // 2
 // 1
 //left before each subsequent cut/
+//other solutuin
+function processData(input) {
+    var sticks = input.match(/[0-9.]+/g);
+    var cutLen;
+
+    sticks.shift();
+
+    sticks = sticks.filter(function(el){return el>=1})
+    cutLen = Math.min.apply(null, sticks);
+
+    while(sticks.length>0) {
+        console.log(sticks.length);
+        cutLen = Math.min.apply(null, sticks);   ///can also do null directly...I used 'this'
+        sticks = sticks.map(function(el){return el-cutLen;})
+        sticks = sticks.filter(function(el){return el>=1})
+    }
+       
+} 
+
+        
 
 process.stdin.resume();
-process.stdin.setEncoding('ascii');
-
-var input_stdin = "";
-var input_stdin_array = "";
-var input_currentline = 0;
-
-process.stdin.on('data', function (data) {
-    input_stdin += data;
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
 });
 
-process.stdin.on('end', function () {
-    input_stdin_array = input_stdin.split("\n");
-    main();    
+process.stdin.on("end", function () {
+   processData(_input);
 });
-
-function readLine() {
-    return input_stdin_array[input_currentline++];
-}
-
-function findMin(arr){
-    return Math.min.apply(this, arr);
-}
-
-function processArr(arr){
-    
-    if (arr.length >0){
-        var min = findMin(arr);
-        var cuts = arr.length;
-        console.log(cuts); 
-        //you cannot manipulate array with filter..
-        var cutArr = arr.map(function(item){
-            
-            if (item-min >0){
-            	item = item-min;
-            	return item;
-            }
-            return 0;
-        })
-        var newArr =cutArr.filter(function(item){
-        	return (item >0);
-        })
-        processArr(newArr);
-    
-    }
-    else
-    	return;
-}
-
-function main() {
-    var n = parseInt(readLine());
-    arr = readLine().split(' ');
-    arr = arr.map(Number); //all numbers //2nd line
-    //5 4 4 2 2 8  
-    processArr(arr);
-}

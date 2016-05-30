@@ -1,49 +1,59 @@
+// my solution
+var elementArray = [];
+function processData(input) {
+    var rock;
+    var elements;
+    var rockCount =0;
+    
+    var data = input.split("\n");  //main array
+    var n = parseInt(data[0].trim(),10); 
+   
+    rock = data[1];
+    
+    for (var s=0 ; s < rock.length ; ++s){
+        elementArray[rock[s]] = 1;
+    }
+    //console.log(elementArray)
+    
+    for (var i=2; i < data.length ; ++i){
+        rock = data[i]; 
+        var added =[];
+        
+        var prop;
+        var added=[];
+        //my approach - loop through elementArray itself and use indexOf
+        for (prop in elementArray){
+            
+            
+            if (rock.indexOf(prop) !== -1 && !added[prop] ){
+                ++elementArray[prop];
+            }
+            added[prop] = true;
 
-// var myArray = new Array();
-//  myArray['a'] = 200; 
-//  myArray['b'] = 300; 
-//  console.log(myArray)
-// [a: 200, b: 300]
-
-
-// You can have an array of objects containing key-value pairs, like this:
-
-// var per_kg_list = [
-//     {'03749': '3.000'},
-//     {'03750': '4.000'},
-//     {'03751': '5.000'}
-// ];
-// Alternatively, you can have an object containing key-value pairs, like this:
-
-// var per_kg_list = {
-//     '03749': '3.000',
-//     '03750': '4.000',
-//     '03751': '5.000'
-// };
-
-//http://stackoverflow.com/questions/37515959/how-to-create-an-associative-array-in-javascript-literal-notation
-
-    var myArray = [];
-     myArray['a'] = 200; 
-     myArray['b'] = 300; 
-     console.log(myArray); //prints [a: 200, b: 300]
-
-//var elementArray = ['a': 200, 'b': 300];
-var rock  ="baccd";
-
-for (var s=0 ; s< elementArray.length ; ++s){ //looping through first rock
-    if (rock(elementArray[s]))
-        console.log(rock(elementArray[s]));
-    else
-        console.log("ledu")
+        }
+        //console.log(elementArray)
+    }
+    //now you have elementArray as [ a: 3, b: 3, c: 2, d: 2, e: 2 ] after all loops
+    // want to return elements that have values of n 
+    var prop;
+    var result=0;
+    for (prop in elementArray){
+        if (elementArray[prop] === n)
+            ++result;
+    }
+    return result;
+   
+   
 }
+ 
 
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
 
-
-
-//input passed from stdin
-// 3
-// abcdde
-// baccd
-// eeabg
-
+process.stdin.on("end", function () {
+   console.log(processData(_input));
+});

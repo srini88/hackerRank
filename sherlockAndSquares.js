@@ -24,15 +24,34 @@
 // 2
 // 0
 
+//Method 2: O(1) 
+//We can simply take  and  and count the numbers between them using
+//sqrt(B) - sqrt(A)+1;
 
-function isInteger(x) {
-    return x % 1 === 0;
-}
+function processData(input) {
+    var inputs = input.split('\n');
+  var casesno = parseInt(inputs[0]);
+  for(var i = 0; i < casesno;i++){
+    var numbers = inputs[1+i].split(' ');
+    var a = parseInt(numbers[0]);
+    var b = parseInt(numbers[1]);
+    var count = 0;
+    var sqrta = Math.ceil(Math.sqrt(a));  //ceil coz inclusive..
+    var sqrtb = Math.floor(Math.sqrt(b)); //floor
+    var number = sqrtb-sqrta;
+      number++;
+    
+    console.log(number);
+  }
+} 
 
-console.log(isInteger(1));
-console.log(isInteger(1.00000)); //true
-console.log(isInteger(1.0001));  //false
-console.log(isInteger(1.5)); //false
-console.log(isInteger(6));
-console.log(isInteger(-7)); //true
-console.log(isInteger(0)); //true
+process.stdin.resume();
+process.stdin.setEncoding("ascii");
+_input = "";
+process.stdin.on("data", function (input) {
+    _input += input;
+});
+
+process.stdin.on("end", function () {
+   processData(_input);
+});

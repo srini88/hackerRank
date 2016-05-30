@@ -51,6 +51,8 @@ var sec_diag = 15;
 // Difference: |4 - 19| = 15
 
 
+//2nd easy way with just one for loop....since we know it is a square matrix..it works..
+
 process.stdin.resume();
 process.stdin.setEncoding('ascii');
 
@@ -82,21 +84,13 @@ function main() {
     }
     var prim_diag = 0;
     var sec_diag = 0;
+    var len = n;   //sq matrix..
     for (var i=0; i < a.length ; ++i){
-        for (var j=0; j < a[i].length; ++j){
-            if (j === i){
-                //console.log(a[i][j])  //11 5 -12
-                prim_diag += a[i][j];
-            }
-            if (j === (a.length-1-i)){
-                //console.log("i: " +i, " j: "+j)  //0 2  , 1 1 , 2 0 
-                //console.log(a[i][j])
-                sec_diag += a[i][j];
-            }
-        }
+        
+        prim_diag += a[i][i];
+        sec_diag += a[i][len-1-i];
     }
-    var result = (prim_diag - sec_diag >=0) ? prim_diag - sec_diag : (prim_diag - sec_diag) * -1  //or you could just use Math.abs()
-    console.log(result)
-    //console.log(a)  //[ [ 11, 2, 4 ], [ 4, 5, 6 ], [ 10, 8, -12 ] ]
+    
+    console.log(Math.abs(prim_diag-sec_diag))
 
 }

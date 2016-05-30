@@ -25,19 +25,36 @@
 // 1
 //left before each subsequent cut/
 
+process.stdin.resume();
+process.stdin.setEncoding('ascii');
 
+var input_stdin = "";
+var input_stdin_array = "";
+var input_currentline = 0;
 
-/////////////// ignore above this line ////////////////////
+process.stdin.on('data', function (data) {
+    input_stdin += data;
+});
+
+process.stdin.on('end', function () {
+    input_stdin_array = input_stdin.split("\n");
+    main();    
+});
+
+function readLine() {
+    return input_stdin_array[input_currentline++];
+}
+
 function findMin(arr){
     return Math.min.apply(this, arr);
 }
 
-function process(arr){
+function processArr(arr){
     
     if (arr.length >0){
         var min = findMin(arr);
         var cuts = arr.length;
-        console.log("min>0 ",cuts); 
+        console.log(cuts); 
         //you cannot manipulate array with filter..
         var cutArr = arr.map(function(item){
             
@@ -50,7 +67,7 @@ function process(arr){
         var newArr =cutArr.filter(function(item){
         	return (item >0);
         })
-        process(newArr);
+        processArr(newArr);
     
     }
     else
@@ -58,10 +75,9 @@ function process(arr){
 }
 
 function main() {
-    var n = 6;
-    //arr = readLine().split(' ');
-    var arr = [5,4,4,2,2,8];
-    process(arr);
+    var n = parseInt(readLine());
+    arr = readLine().split(' ');
+    arr = arr.map(Number); //all numbers //2nd line
+    //5 4 4 2 2 8  
+    processArr(arr);
 }
-
-main();

@@ -2,7 +2,6 @@
 // list all palindrome numbers in a range
 // Integer is to not allowed to be treated a string and typecasting is not allowed
 
-//code to reverse a number altogether.... 
 var isPalindrome = function(n){
 	var actual =n;
 
@@ -13,13 +12,18 @@ var isPalindrome = function(n){
 		reverse = (reverse*10)+rem;
 		n = Math.floor(n/10);
 	}
-	return reverse;
-
-
-
+	return (actual === reverse);
 }
 
-console.log(isPalindrome(1234567));  //7654321
+//now lets print all palindrome numbers in a range
+var start = 100;
+var end = 1000;
+
+for (var i=start; i <=end; i++){
+	if (isPalindrome(i))
+		console.log(i);
+}
+//console.log(isPalindrome(1234567));  //7654321
 
 
 

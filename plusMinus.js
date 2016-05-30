@@ -93,6 +93,7 @@ function main() {
         else
             ++negC;
     }
+    //want in different lines --can also do console.log(pos + '\n' + neg + '\n' + zero);
     console.log((posC/n).toFixed(6))
     console.log((negC/n).toFixed(6))
     console.log((zeroC/n).toFixed(6))

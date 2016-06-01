@@ -1,35 +1,63 @@
-var arr1 = "john".split('');
 
-//console.log(arr1)  //["j", "o", "h", "n"]
-//console.log(arr1.length)  4
-var arr2 = arr1.reverse();
+//find the max difference.......
 
-//console.log(arr2)  //["n", "h", "o", "j"]
-//console.log(arr1)   //["n", "h", "o", "j"]  - reversed arr1 inplace...
+// var arr = [8, 9, 10, 1, 2, 7, 9];
+// var arr = [-10, -9, -8, -7, -6, -5];
+// var arr = [4, 9, 10, 6, 2, 7, 9];
+// var arr = [0, 0, 0, 0, 0, 0, 0];
+var arr = [4, 9, 10, 6, 8, 10, 23];
 
-var arr3 = "jones".split('');
-//console.log(arr3)  //["j", "o", "n", "e", "s"]
-//console.log(arr1)  //["n", "h", "o", "j"] stiill same
- 
+console.log(arr);
+size = arr.length;
 
-arr2.push(arr3);  //arr2 got modified , which modified arr1
+///2nd approach coming from the last 
 
-//console.log(arr1)  //now this prints ["n", "h", "o", "j", Array[5]]
-//console.log(arr2)   //["n", "h", "o", "j", Array[5]]
-//console.log(arr2[4])  //["j", "o", "n", "e", "s"]
+// var max = arr[size-1];
+// var min = arr[size-1];
+// var max_diff = 0;
 
 
-console.log(arr1.length)
+// for (var i = arr[size-2]; i>=0; --i){
 
-console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1));
-console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1));
 
-//https://www.toptal.com/javascript/interview-questions
-arr1 and arr2 are the same after the above code is executed for the following reasons:
+//     if (arr[i] > max){
 
-Calling an array object’s reverse() method doesn’t only return the array in reverse order, it also reverses the order of the array itself (i.e., in this case, arr1).
-The reverse() method returns a reference to the array itself (i.e., in this case, arr1). As a result, arr2 is simply a reference to (rather than a copy of) arr1. Therefore, when anything is done to arr2 (i.e., when we invoke arr2.push(arr3);), arr1 will be affected as well since arr1 and arr2 are simply references to the same object.
-And a couple of side points here that can sometimes trip someone up in answering this question:
+//         max = arr[i];
+//         min = arr[i];
+//         console.log("arr[i]: " + arr[i] + " max: " + max + " min: " + min);
+//     }
 
-Passing an array to the push() method of another array pushes that entire array as a single element onto the end of the array. As a result, the statement arr2.push(arr3); adds arr3 in its entirety as a single element to the end of arr2 (i.e., it does not concatenate the two arrays, that’s what the concat() method is for).
-Like Python, JavaScript honors negative subscripts in calls to array methods like slice() as a way of referencing elements at the end of the array; e.g., a subscript of -1 indicates the last element in the array, and so on.
+//     else if (arr[i] < min){
+
+//         min = arr[i];
+
+//         if (max-min > max_diff){
+//             max_diff = max-min;
+//         }
+//         console.log("arr[i]: " + arr[i] + " max: " + max + " min: " + min +" max_diff: " + max_diff);
+//     }
+
+
+
+// }
+// console.log(max_diff);
+
+////approach coming form the start...
+var max_diff = 0;
+var max = arr[0];
+var min = arr[0];
+
+for (var i=1; i < size ; ++i){
+
+    if (arr[i] > max){
+        max = arr[i];
+        if (max - min > max_diff){
+            max_diff = max-min;
+        }
+    }
+    else if (arr[i] < min){
+        max = arr[i];
+        min = arr[i];
+    }
+}
+console.log(max_diff)

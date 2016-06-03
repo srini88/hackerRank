@@ -1,28 +1,31 @@
 
-var a=[0, 1, 0, 3, 2, 5]
+//var a=[0, 1, 0, 3, 2, 5]
+var a=[1,2, 3, 4, 0, 0, 0, 0]
 
-//move all zeroes to the end and keep the relative order...
+/////nmove all the zeroes to the front...
 
-
-var zeroindex = a.length;  //setting becasue if there are no zeroes we dont want to go to the second for loop
-for(i=0;i<a.length;i++)
+var zeroindex = a.length;  
+for(i= a.length-1; i>=0 ;i--)
 {
     if(a[i]==0)
     {
         zeroindex = i;
         break;
-    }  //you find the first zero elemet and save the index and come out of loop
+    }  
 }
 
-for(i=zeroindex+1;i<a.length;i++)
-{
-    if(a[i] !=0)  ///moving non-zero to the front,,not dealing with zeros only..
-    {
-        var temp = a[i];
+console.log(zeroindex)
+
+
+for (i = zeroindex-1; i>=0 ; i--){
+    if (a[i]!= 0){
+        var temp;
+
+        temp = a[i];
+        a[i] = a[zeroindex];
         a[zeroindex] = temp;
-        a[i] = 0;
-        zeroindex++;
+        zeroindex--;
     }
-    console.log(a)
 }
-//console.log(a);
+
+console.log(a);

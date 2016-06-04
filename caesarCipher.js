@@ -1,22 +1,21 @@
-//var a=[0, 1, 0, 3, 2, 5];  //works for this..
-var a = [1, 0, 0, 1, 2, 5]; // [1, 0, 1, 2, 5, 0] does not work for this..
 
-// The problem has nothing to do with the return statement, the issue is your algorithm is wrong.
+//var a = [1, 0, 0, 1, 2, 5]; // [0, 0, 1, 1, 2, 5]
+//var a = [0,0,0,0,0,0, 1, 2, 3, 0, 5];  //[0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 5]]
+var a = [1, 2, 3, 1, 2, 3, 0, 0, 0]   //[0, 0, 0, 1, 2, 3, 1, 2, 3]
+//This also works...moving zero to the start of the array...here we can go  from left to right..
 
-// [0,0,1,2,3] will return [0,1,2,3,0]
-
-// When you loop in the positive direction and remove indexes, you skip indexes as the next index slides down to the position you already covered.
-
-// You need to loop in the negative direction. Start at the end and go to the start.
-
-///THis works perfect....splice remember to do it fromthe end of the loop..
 var rem =[];
-for (var i=a.length-1 ; i >=0 ; --i){
-
+for (var i=0 ; i <a.length ; ++i){
 	if (a[i]===0){
 		rem = a.splice(i, 1);
-		a.push(rem[0]);   
+		a.unshift(rem[0]);   
 	}
 
 }
 console.log(a);
+
+
+///splice worst case time complexity..
+/////Worst case should be O(n) (copying all n-1 elements to new array).
+
+//A linked list would be O(1) for a single deletion.
